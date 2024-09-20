@@ -2,6 +2,7 @@
 input/*
 input_examples/*
 output/*
+settings.json
 
 # Allow the input and output folders themselves
 !input/

@@ -7,6 +7,11 @@
 	"settings": {
 		"files.exclude": {
 			"**/venv": true
-		}
+		},
+		"vscord.status.details.text.viewing": "{problems}",
+		"vscord.status.state.text.debugging": "Debugging",
+		"vscord.status.details.text.editing": "Dealing with {problems}",
+		"vscord.status.problems.text": "{problems_count} problems",
+		"vscord.app.privacyMode.enable": false
 	}
 }

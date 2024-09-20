@@ -1,8 +1,14 @@
 {
+    "files.exclude": {
+        "**/input_examples/**": true // Exclude this folder from the file explorer
+    },
+    "search.exclude": {
+        "**/input_examples/**": true // Exclude this folder from searches
+    },
     "python.linting.ignorePatterns": [
-        "input/**" // Ignore linting in this folder
+        "input/**"
     ],
     "python.analysis.exclude": [
-        "input/**" // Exclude from analysis (error checking)
+        "input/**"
     ]
 }
