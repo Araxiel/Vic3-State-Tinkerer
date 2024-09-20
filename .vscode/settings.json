@@ -1,0 +1,8 @@
+{
+    "python.linting.ignorePatterns": [
+        "input/map_data/**" // Ignore linting in this folder
+    ],
+    "python.analysis.exclude": [
+        "input/map_data/**" // Exclude from analysis (error checking)
+    ]
+}

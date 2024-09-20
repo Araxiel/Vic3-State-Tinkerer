@@ -1,3 +1,11 @@
+# Ignore everything in the input and output folders
+input/*
+output/*
+
+# Allow the input and output folders themselves
+!input/
+!output/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
