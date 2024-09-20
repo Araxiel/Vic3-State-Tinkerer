@@ -1,5 +1,6 @@
 # Ignore everything in the input and output folders
 input/*
+input_examples/*
 output/*
 
 # Allow the input and output folders themselves
