@@ -1,8 +1,9 @@
 # Ignore everything in the input and output folders
-input/*
-input_examples/*
-output/*
+_input/*
+_output/*
+_notepad/*
 settings.json
+.vscode/*
 
 # Allow the input and output folders themselves
 !input/
