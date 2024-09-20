@@ -2,7 +2,7 @@ import os
 import re
 import pandas as pd
 
-from parser import parse_state_region, parse_state_ownership
+from parser import parse_state_region, parse_state_ownership, parse_population
 from utils import create_output_folder
 
 # Setup output folder
@@ -38,6 +38,27 @@ with open(history_states_file, 'r', encoding='utf-8-sig') as file:
                 if state['state_name'] == ownership_info['state_name']:
                     state['ownership'] = ownership_info['ownership']
                     state['homelands'] = ownership_info['homelands']
+
+# Path to the pops folder
+pops_folder = './input/common/history/pops/'
+
+# List to hold all parsed population data
+pops_data = []
+
+# Loop over all files in the pops folder
+for filename in os.listdir(pops_folder):
+    if filename.endswith('.txt'):
+        with open(os.path.join(pops_folder, filename), 'r', encoding='utf-8-sig') as file:
+            content = file.read()
+            state_blocks = re.findall(r's:STATE_\w+\s*=\s*{[^}]+}', content, re.DOTALL)
+
+            for state_block in state_blocks:
+                population_info = parse_population(state_block)
+                if population_info:
+                    pops_data.append(population_info)
+
+# You can print or save this data to a CSV as needed
+print(f"Parsed {len(pops_data)} states with population data")
 
 # Output data
 
