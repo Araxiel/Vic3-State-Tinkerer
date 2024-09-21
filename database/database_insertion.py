@@ -1,19 +1,47 @@
-def insert_state_data(conn, state_data):
-    cursor = conn.cursor()
+from debugging.logger import setup_logger
 
-    # DEBUG: Log or print the state_data to check its structure
+
+def insert_state_data(conn, state_data, debug=False):
+    cursor = conn.cursor()
+    logger = setup_logger(debug=debug)
+    logger.info("Starting to insert the region states database...")
+
     for state in state_data:
-        print(f"Inserting state: {state}")  # This will show you the structure of each state
-    
+        if debug:
+            print(f"Inserting state: {state['state_name']}")  # This will show you the structure of each state
+
+        # Convert lists to comma-separated strings for storing in the database
+        provinces_str = ','.join(state.get('provinces', []))
+        traits_str = ','.join(state.get('traits', []))  # Convert traits list to a comma-separated string
+        arable_resources_str = ','.join(state.get('arable_resources', []))
+        capped_resources_str = ','.join([f"{key}:{value}" for key, value in state.get('capped_resources', {}).items()])
+
+        logger.info(f"Inserting state: {state['state_name']}")
+        logger.info(f"{state['state_name']} Subsistence: {state.get('subsistence_building', None)}")
+
+        # Insert the state data, including the resource block as a string
         cursor.execute('''
-            INSERT INTO states (name, region, arable_land, arable_resources, capped_resources)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO states (
+                id, name, subsistence_building, provinces, traits, city, port, farm, mine, wood,
+                arable_land, arable_resources, capped_resources, resources, naval_exit_id
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
-            state['state_name'],  # Ensure 'state_name' exists in state_data
-            state.get('region', None),  # If 'region' is not found, default to None
+            state.get('id', None),
+            state['state_name'],
+            state.get('subsistence_building', None),
+            provinces_str,
+            traits_str,
+            state.get('city', None),
+            state.get('port', None),
+            state.get('farm', None),
+            state.get('mine', None),
+            state.get('wood', None),
             state.get('arable_land', None),
-            ','.join(state.get('arable_resources', [])),  # If 'arable_resources' is missing, use an empty list
-            ','.join(state.get('capped_resources', []))
+            arable_resources_str,
+            capped_resources_str,
+            state.get('resources', None),  # Store the full resource block as a string
+            state.get('naval_exit_id', None)
         ))
 
     conn.commit()

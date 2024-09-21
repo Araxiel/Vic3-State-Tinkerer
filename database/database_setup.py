@@ -9,13 +9,27 @@ def create_tables(conn):
     """Creates the necessary tables for states, countries, pops, and resources."""
     cursor = conn.cursor()
 
+    # Drop the table if it exists
+    cursor.execute('DROP TABLE IF EXISTS states')
+
     # Create States table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS states (
-            id INTEGER PRIMARY KEY,
-            name TEXT NOT NULL,
-            region TEXT,
-            arable_land INTEGER
+            id INTEGER PRIMARY KEY,           -- The state id
+            name TEXT NOT NULL,               -- The state name
+            subsistence_building TEXT,         -- The subsistence building in the state
+            provinces TEXT,                    -- Provinces as a comma-separated string
+            traits TEXT,                       -- Capped resources as a comma-separated string
+            city TEXT,                         -- City in the state
+            port TEXT,                         -- Port in the state
+            farm TEXT,                         -- Farm in the state
+            mine TEXT,                         -- Mine in the state
+            wood TEXT,                         -- Wood in the state
+            arable_land INTEGER,               -- Arable land amount
+            arable_resources TEXT,             -- Arable resources as a comma-separated string
+            capped_resources TEXT,             -- Capped resources as a comma-separated string
+            resources TEXT,                    -- Type of undiscovered resource (if present)
+            naval_exit_id INTEGER              -- Naval exit id (if present)
         )
     ''')
 
