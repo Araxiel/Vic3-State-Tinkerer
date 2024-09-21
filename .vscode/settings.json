@@ -1,14 +1,12 @@
 {
-    "files.exclude": {
-        "**/input_examples/**": true // Exclude this folder from the file explorer
-    },
-    "search.exclude": {
-        "**/input_examples/**": true // Exclude this folder from searches
-    },
     "python.linting.ignorePatterns": [
-        "input/**"
+        "**/_input/**",
+        "**/_input/**",
+        "E:/Files/Victoria 3 Modding/Vic3 State Tinkerer/_input"
     ],
     "python.analysis.exclude": [
-        "input/**"
+        "_input/**",
+        "**/_input/**",
+        "E:/Files/Victoria 3 Modding/Vic3 State Tinkerer/_input"
     ]
 }
