@@ -4,6 +4,7 @@ _output/*
 _notepad/*
 settings.json
 .vscode/*
+*.db
 
 # Allow the input and output folders themselves
 !input/
